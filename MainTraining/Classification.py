@@ -1,12 +1,11 @@
 import tensorflow as tf
-from tensorflow.keras.applications import VGG16
-from tensorflow.keras.applications import ResNet50V2
-from tensorflow.keras.applications import Xception
-from tensorflow.keras.applications import MobileNetV3Large
+from keras.applications import VGG16
+from keras.applications import ResNet50V2
+from keras.applications import Xception
+from keras.applications import MobileNetV3Large
 
 import numpy as np
 import time
-
 
 # Divisão dos datasets de treinamento e validação (utilizando função do keras)
 image_size = (224, 224)
