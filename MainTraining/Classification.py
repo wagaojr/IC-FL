@@ -1,11 +1,12 @@
 import tensorflow as tf
-from keras.applications import VGG16
-from keras.applications import ResNet50V2
-from keras.applications import Xception
-from keras.applications import MobileNetV3Large
+from tensorflow.keras.applications import VGG16
+from tensorflow.keras.applications import ResNet50V2
+from tensorflow.keras.applications import Xception
+from tensorflow.keras.applications import MobileNetV3Large
 
 import numpy as np
 import time
+
 
 # Divisão dos datasets de treinamento e validação (utilizando função do keras)
 image_size = (224, 224)
@@ -13,7 +14,7 @@ image_shape = image_size + (3,)
 batch_size = 32
 
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    'Potholes classification/traindata',
+    '/net/tijuca/lab/users/LuisH/wagner/ic_fl/TrainData/TrainData',
     validation_split = 0.2,
     subset = 'training',
     seed = 47,
@@ -22,7 +23,7 @@ train_ds = tf.keras.preprocessing.image_dataset_from_directory(
 )
 
 val_ds = tf.keras.preprocessing.image_dataset_from_directory(
-    'Potholes classification/traindata',
+    '/net/tijuca/lab/users/LuisH/wagner/ic_fl/TrainData/TrainData',
     validation_split = 0.2,
     subset = 'validation',
     seed = 47,
@@ -106,19 +107,19 @@ while (rep <= 3): # Executa uma vez para cada modelo a ser testado
     model.save('save' + names[rep] + '.h5', save_format="h5")
 
     # Salva o histórico das métricas escolhidas em arquivos txt 
-    with open('MainTraining/history/' + names[rep] + '/accuracy' + names[rep] + '.txt', 'a') as f:
+    with open('/net/tijuca/lab/users/LuisH/wagner/ic_fl/history/' + names[rep] + '/accuracy' + names[rep] + '.txt', 'a') as f:
         for i in H.history['accuracy']:
             f.writelines(str(i) + '\n')
-    with open('MainTraining/history/' + names[rep] + '/val_accuracy' + names[rep] + '.txt', 'a') as f:
+    with open('/net/tijuca/lab/users/LuisH/wagner/ic_fl/history/' + names[rep] + '/val_accuracy' + names[rep] + '.txt', 'a') as f:
         for i in H.history['val_accuracy']:
             f.writelines(str(i) + '\n')
-    with open('MainTraining/history/' + names[rep] + '/loss' + names[rep] + '.txt', 'a') as f:
+    with open('/net/tijuca/lab/users/LuisH/wagner/ic_fl/history/' + names[rep] + '/loss' + names[rep] + '.txt', 'a') as f:
         for i in H.history['loss']:
             f.writelines(str(i) + '\n')
-    with open('MainTraining/history/' + names[rep] + '/val_loss' + names[rep] + '.txt', 'a') as f:
+    with open('/net/tijuca/lab/users/LuisH/wagner/ic_fl/history/' + names[rep] + '/val_loss' + names[rep] + '.txt', 'a') as f:
         for i in H.history['val_loss']:
             f.writelines(str(i) + '\n')
-    with open('MainTraining/history/time.txt', 'a') as f:
+    with open('/net/tijuca/lab/users/LuisH/wagner/ic_fl/history/time.txt', 'a') as f:
         f.writelines(names[rep] + ' - ' + str(time.time() - start_time) + '\n')
 
     rep += 1
